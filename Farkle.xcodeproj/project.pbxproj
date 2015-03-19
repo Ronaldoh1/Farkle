@@ -14,6 +14,7 @@
 		F2D8C48F1ABB7AB800A836C1 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2D8C48E1ABB7AB800A836C1 /* Images.xcassets */; };
 		F2D8C4921ABB7AB800A836C1 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F2D8C4901ABB7AB800A836C1 /* LaunchScreen.xib */; };
 		F2D8C49E1ABB7AB800A836C1 /* FarkleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8C49D1ABB7AB800A836C1 /* FarkleTests.m */; };
+		F2D8C4A91ABB7B2E00A836C1 /* DieLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8C4A81ABB7B2E00A836C1 /* DieLabel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		F2D8C4971ABB7AB800A836C1 /* FarkleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FarkleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D8C49C1ABB7AB800A836C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D8C49D1ABB7AB800A836C1 /* FarkleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FarkleTests.m; sourceTree = "<group>"; };
+		F2D8C4A71ABB7B2E00A836C1 /* DieLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DieLabel.h; sourceTree = "<group>"; };
+		F2D8C4A81ABB7B2E00A836C1 /* DieLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DieLabel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				F2D8C4861ABB7AB800A836C1 /* AppDelegate.m */,
 				F2D8C4881ABB7AB800A836C1 /* ViewController.h */,
 				F2D8C4891ABB7AB800A836C1 /* ViewController.m */,
+				F2D8C4A71ABB7B2E00A836C1 /* DieLabel.h */,
+				F2D8C4A81ABB7B2E00A836C1 /* DieLabel.m */,
 				F2D8C48B1ABB7AB800A836C1 /* Main.storyboard */,
 				F2D8C48E1ABB7AB800A836C1 /* Images.xcassets */,
 				F2D8C4901ABB7AB800A836C1 /* LaunchScreen.xib */,
@@ -222,6 +227,7 @@
 				F2D8C48A1ABB7AB800A836C1 /* ViewController.m in Sources */,
 				F2D8C4871ABB7AB800A836C1 /* AppDelegate.m in Sources */,
 				F2D8C4841ABB7AB800A836C1 /* main.m in Sources */,
+				F2D8C4A91ABB7B2E00A836C1 /* DieLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
