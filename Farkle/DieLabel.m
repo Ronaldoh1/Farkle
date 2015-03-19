@@ -12,13 +12,20 @@
 
 
 
--(IBAction)onTapped:(UITapGestureRecognizer *)sender{
-
+-(IBAction)onTapped:(UITapGestureRecognizer *)sender
+{
+    [self.delegate checkLabelTapped];
 }
+
+
 -(void)roll{
 
-    self.randomLabelNumber = arc4random() % 6;
+    self.randomLabelNumber = arc4random() % 6 + 1;
 
 }
+
+
+-(BOOL)checkLabelTapped:(DieLabel *)label;
+
 
 @end

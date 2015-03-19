@@ -8,9 +8,20 @@
 
 #import <UIKit/UIKit.h>
 
+@class DieLabel;
+
+@protocol DieLabelDelegate <NSObject>
+
+-(BOOL)checkLabelTapped:(DieLabel *)label;
+
+
+@end
+
 @interface DieLabel : UILabel
+
 @property int randomLabelNumber;
+@property id<DieLabelDelegate> delegate;
+
 
 -(void)roll;
-
 @end
