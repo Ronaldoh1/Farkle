@@ -6,26 +6,30 @@
 //  Copyright (c) 2015 Ron. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "BoardViewController.h"
 #import "DieLabel.h"
 
-@interface ViewController () <DieLabelDelegate,UIGestureRecognizerDelegate>
+@interface BoardViewController () <DieLabelDelegate,UIGestureRecognizerDelegate>
+@property (weak, nonatomic) IBOutlet UILabel *userScore;
 
-@property (strong, nonatomic) IBOutletCollection(DieLabel) NSArray *labelCollection;
-@property NSMutableArray *dice;
+@property (strong, nonatomic) IBOutletCollection(DieLabel) NSArray *dice;
+@property NSMutableArray *DieLabels;
+@property NSMutableArray *combinationsArray;
 
 @end
 
-@implementation ViewController
+@implementation BoardViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
-    self.dice = [NSMutableArray new];
-    for (DieLabel *die in self.labelCollection) {
+    
+    self.DieLabels = [NSMutableArray new];
+    for (DieLabel *die in self.dice) {
         die.delegate = self;
         die.isTapped = NO;
-        [self.dice addObject:die];
+        [self.DieLabels addObject:die];
     }
     // Do any additional setup after loading the view, typically from a nib.
 }
@@ -37,16 +41,19 @@
     label.isTapped = !label.isTapped;
     
     if (label.isTapped) {
-        [self.dice removeObject:label];
+        [self.DieLabels removeObject:label];
+        label.backgroundColor = [UIColor blueColor];
+        NSLog(@"%@",label.text);
     } else {
-        [self.dice addObject:label];
+        [self.DieLabels addObject:label];
+        label.backgroundColor = [UIColor redColor];
     }
     return label.isTapped;
 }
 
 
 - (IBAction)onRollButtonPressed:(UIButton *)sender {
-    for (DieLabel *die in self.dice) {
+    for (DieLabel *die in self.DieLabels) {
         
         if (!die.isTapped) {
             [die roll];
