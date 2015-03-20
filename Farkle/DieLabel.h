@@ -12,7 +12,7 @@
 
 @protocol DieLabelDelegate <NSObject>
 
--(BOOL)checkLabelTapped:(DieLabel *)label;
+-(BOOL)checkLabelTapped:(UIGestureRecognizer *)tapGesture;
 
 
 @end
@@ -21,6 +21,7 @@
 
 @property int randomLabelNumber;
 @property id<DieLabelDelegate> delegate;
+@property BOOL isTapped;
 
 
 -(void)roll;

@@ -21,22 +21,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.dice = [NSMutableArray new];
     for (DieLabel *die in self.labelCollection) {
         die.delegate = self;
+        die.isTapped = NO;
+        [self.dice addObject:die];
     }
     // Do any additional setup after loading the view, typically from a nib.
 }
 
--(void)checkLabelTapped:(DieLabel *)label
+-(BOOL)checkLabelTapped:(UIGestureRecognizer *)tapGesture
 {
+    
+    DieLabel *label = (DieLabel *)tapGesture.view;
     label.isTapped = !label.isTapped;
+    
+    if (label.isTapped) {
+        [self.dice removeObject:label];
+    } else {
+        [self.dice addObject:label];
+    }
+    return label.isTapped;
 }
 
 
 - (IBAction)onRollButtonPressed:(UIButton *)sender {
-    for (DieLabel *die in self.labelCollection) {
+    for (DieLabel *die in self.dice) {
         
-        if (!die.checkLabelTapped) {
+        if (!die.isTapped) {
             [die roll];
             die.text = [NSString stringWithFormat:@"%i",die.randomLabelNumber];
             NSLog(@"%@",die.text);

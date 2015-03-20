@@ -10,22 +10,18 @@
 
 @implementation DieLabel
 
-
-
--(IBAction)onTapped:(UITapGestureRecognizer *)sender
+-(IBAction)onTapped:(UIGestureRecognizer *)sender
 {
-    [self.delegate checkLabelTapped];
+    [self.delegate checkLabelTapped:sender];
 }
 
 
--(void)roll{
-
+-(void)roll
+{
     self.randomLabelNumber = arc4random() % 6 + 1;
 
 }
 
-
--(BOOL)checkLabelTapped:(DieLabel *)label;
 
 
 @end
