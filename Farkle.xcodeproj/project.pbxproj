@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F24FFDCC1ABCF1B700358CC9 /* Player.m in Sources */ = {isa = PBXBuildFile; fileRef = F24FFDCB1ABCF1B700358CC9 /* Player.m */; };
+		F2C32B7E1ABCF42F00953252 /* Game.m in Sources */ = {isa = PBXBuildFile; fileRef = F2C32B7D1ABCF42F00953252 /* Game.m */; };
 		F2D8C4841ABB7AB800A836C1 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8C4831ABB7AB800A836C1 /* main.m */; };
 		F2D8C4871ABB7AB800A836C1 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8C4861ABB7AB800A836C1 /* AppDelegate.m */; };
 		F2D8C48A1ABB7AB800A836C1 /* BoardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F2D8C4891ABB7AB800A836C1 /* BoardViewController.m */; };
@@ -29,6 +31,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F24FFDCA1ABCF1B700358CC9 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		F24FFDCB1ABCF1B700358CC9 /* Player.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Player.m; sourceTree = "<group>"; };
+		F2C32B7C1ABCF42F00953252 /* Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
+		F2C32B7D1ABCF42F00953252 /* Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Game.m; sourceTree = "<group>"; };
 		F2D8C47E1ABB7AB800A836C1 /* Farkle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Farkle.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2D8C4821ABB7AB800A836C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F2D8C4831ABB7AB800A836C1 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -93,6 +99,10 @@
 				F2D8C4891ABB7AB800A836C1 /* BoardViewController.m */,
 				F2D8C4AA1ABBB5A400A836C1 /* Combinations.h */,
 				F2D8C4AB1ABBB5A400A836C1 /* Combinations.m */,
+				F24FFDCA1ABCF1B700358CC9 /* Player.h */,
+				F2C32B7C1ABCF42F00953252 /* Game.h */,
+				F2C32B7D1ABCF42F00953252 /* Game.m */,
+				F24FFDCB1ABCF1B700358CC9 /* Player.m */,
 				F2D8C4A71ABB7B2E00A836C1 /* DieLabel.h */,
 				F2D8C4A81ABB7B2E00A836C1 /* DieLabel.m */,
 				F2D8C48B1ABB7AB800A836C1 /* Main.storyboard */,
@@ -233,6 +243,8 @@
 				F2D8C4AC1ABBB5A400A836C1 /* Combinations.m in Sources */,
 				F2D8C4871ABB7AB800A836C1 /* AppDelegate.m in Sources */,
 				F2D8C4841ABB7AB800A836C1 /* main.m in Sources */,
+				F24FFDCC1ABCF1B700358CC9 /* Player.m in Sources */,
+				F2C32B7E1ABCF42F00953252 /* Game.m in Sources */,
 				F2D8C4A91ABB7B2E00A836C1 /* DieLabel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +438,7 @@
 				F2D8C4A31ABB7AB800A836C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F2D8C4A41ABB7AB800A836C1 /* Build configuration list for PBXNativeTarget "FarkleTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +447,7 @@
 				F2D8C4A61ABB7AB800A836C1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

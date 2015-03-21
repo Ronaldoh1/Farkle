@@ -18,6 +18,8 @@
     self.points = points;
 
     return self;
+
 }
 
 @end
+
