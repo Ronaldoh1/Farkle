@@ -11,8 +11,10 @@
 @interface Combinations : NSObject
 
 @property (nonatomic) int points;
-@property (nonatomic) NSArray * winningCombination;
+@property (nonatomic) NSDictionary * winningCombination6;
+@property (nonatomic) NSArray * winningCombination3;
+@property (nonatomic) NSArray * winningCombination1;
 
--(instancetype) initWithNumbers:(NSArray *)diceNumbers andWithPoints:(int)points;
+
 
 @end

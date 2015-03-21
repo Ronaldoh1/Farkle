@@ -10,16 +10,49 @@
 
 @implementation Combinations
 
+-(instancetype)init{
+      self = [super init];
 
--(instancetype)initWithNumbers:(NSArray *)diceNumbers andWithPoints:(int)points{
 
-    self = [super init];
-    self.winningCombination = diceNumbers;
-    self.points = points;
+    self.winningCombination6 = [[NSDictionary alloc] init];
+    self.winningCombination3 = [[NSMutableArray alloc] init];
+    self.winningCombination1 = [[NSMutableArray alloc] init];
+    self.points = 0;
 
     return self;
 
 }
+
+
+-(NSInteger)checkForPoints:(NSMutableArray *)selectedDice{
+
+    if(selectedDice.count == 6){
+
+    for (NSArray *combination in self.winningCombination6.allKeys){
+
+    if ([combination isEqual:selectedDice]) {
+
+        return [self.winningCombination6[combination] integerValue];
+
+       }
+
+    }
+}
+    }else {
+        for (<#initialization#>; <#condition#>; <#increment#>) {
+            <#statements#>
+        }
+
+    }
+
+
+
+    return 0;
+
+}
+
+
+
 
 @end
 
