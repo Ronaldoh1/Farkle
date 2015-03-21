@@ -15,6 +15,7 @@
 @property (nonatomic) NSDictionary * winningCombination3;
 @property (nonatomic) NSDictionary * winningCombination1;
 
+-(NSInteger)checkForPoints:(NSArray *)selectedDice;
 
 
 @end

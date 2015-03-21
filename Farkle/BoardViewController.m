@@ -8,6 +8,7 @@
 
 #import "BoardViewController.h"
 #import "DieLabel.h"
+#import "Combinations.h"
 
 @interface BoardViewController () <DieLabelDelegate,UIGestureRecognizerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *userScore;
@@ -31,8 +32,19 @@
         die.isTapped = NO;
         [self.DieLabels addObject:die];
     }
-    // Do any additional setup after loading the view, typically from a nib.
+    NSArray *ary1 = @[@1,@1,@5,@5,@2];
+    NSArray *ary2 = @[@5,@5,@5];
+    
+//    NSCountedSet *set1 =[[NSCountedSet alloc]initWithArray:ary1];
+//    NSCountedSet *set2 =[[NSCountedSet alloc]initWithArray:ary2];
+//    NSSet *set1 =[[NSSet alloc]initWithArray:ary1];
+//    NSSet *set2 =[[NSSet alloc]initWithArray:ary2];
+//    NSLog(@"%@",[set2 isSubsetOfSet:set1]?@"YES":@"NO");
+    
+    Combinations *combinations = [[Combinations alloc]init];
+//    NSInteger score = [combinations checkForPoints:@[@1,@1,@2,@3,@1,@1]];
 }
+
 
 -(BOOL)checkLabelTapped:(UIGestureRecognizer *)tapGesture
 {
