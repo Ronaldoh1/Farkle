@@ -12,8 +12,8 @@
 
 @property (nonatomic) int points;
 @property (nonatomic) NSDictionary * winningCombination6;
-@property (nonatomic) NSArray * winningCombination3;
-@property (nonatomic) NSArray * winningCombination1;
+@property (nonatomic) NSDictionary * winningCombination3;
+@property (nonatomic) NSDictionary * winningCombination1;
 
 
 

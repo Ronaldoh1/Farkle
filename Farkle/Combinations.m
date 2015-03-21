@@ -15,8 +15,8 @@
 
 
     self.winningCombination6 = [[NSDictionary alloc] init];
-    self.winningCombination3 = [[NSMutableArray alloc] init];
-    self.winningCombination1 = [[NSMutableArray alloc] init];
+    self.winningCombination3 = [[NSDictionary alloc] init];
+    self.winningCombination1 = [[NSDictionary alloc] init];
     self.points = 0;
 
     return self;
@@ -26,28 +26,80 @@
 
 -(NSInteger)checkForPoints:(NSMutableArray *)selectedDice{
 
-    if(selectedDice.count == 6){
+    NSInteger tempScore = 0;
 
-    for (NSArray *combination in self.winningCombination6.allKeys){
+    NSMutableArray *tempSelectedDiceArray =  selectedDice.copy;
 
-    if ([combination isEqual:selectedDice]) {
+    if(tempSelectedDiceArray.count == 6){
 
-        return [self.winningCombination6[combination] integerValue];
+        for (NSArray *combination in self.winningCombination6){
 
-       }
+            if ([combination isEqual:selectedDice]) {
 
-    }
-}
+                tempScore = [self.winningCombination6[combination] integerValue];
+
+                return tempScore;
+
+
+            }
+
+        }
+
     }else {
-        for (<#initialization#>; <#condition#>; <#increment#>) {
-            <#statements#>
+
+
+
+        for (NSArray *combination in self.winningCombination3){
+
+            int count = 0;
+            NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+
+            for (NSNumber *someNumber in combination){
+                if ([tempSelectedDiceArray containsObject:someNumber]){
+                    count++;
+                    [tempArray addObject:someNumber];
+
+                } else {
+                    NSLog(@"please select another combination");
+
+                    break;
+
+                }
+
+
+            }
+
+            if (count == 3) {
+                for (int i = 0; i<tempArray.count; i++){
+                    [tempSelectedDiceArray removeObject:tempArray[i]];
+
+                }
+                tempScore = [self.winningCombination3[combination] integerValue];
+                count = 0;
+            }
+
+
+        }
+        if (tempSelectedDiceArray.count != 0) {
+            for (NSArray *combination in self.winningCombination1) {
+                if ([tempSelectedDiceArray containsObject:combination[0]]){
+                    [tempSelectedDiceArray removeObject:combination[0]];
+                    tempScore += [self.winningCombination1[combination] integerValue];
+
+                }else{
+                    NSLog(@"please select other combinations");
+                    break;
+                }
+
+            }
+
         }
 
     }
 
 
 
-    return 0;
+    return tempScore;
 
 }
 
