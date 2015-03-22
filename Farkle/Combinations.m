@@ -116,10 +116,15 @@
 
     }
     if (tempSelectedDiceArray.count != 0) {
-        for (NSArray *combination in self.winningCombination1) {
-            if ([tempSelectedDiceArray containsObject:combination[0]]){
-                [tempSelectedDiceArray removeObject:combination[0]];
-                tempScore += [self.winningCombination1[combination] integerValue];
+        for (int i = 0; i<tempSelectedDiceArray.count; i++){
+            if ([tempSelectedDiceArray[i] isEqual:@[@1]]){
+                [tempSelectedDiceArray removeObject:@1];
+                tempScore += [self.winningCombination1[@[@1]] integerValue];
+
+            }
+            if ([tempSelectedDiceArray[i] isEqual:@[@5]]){
+                [tempSelectedDiceArray removeObject:@5];
+                tempScore += [self.winningCombination1[@[@5]] integerValue];
 
             }else{
                 NSLog(@"please select other combinations");

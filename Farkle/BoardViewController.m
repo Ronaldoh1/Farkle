@@ -16,6 +16,11 @@
 @property (strong, nonatomic) IBOutletCollection(DieLabel) NSArray *dice;
 @property NSMutableArray *DieLabels;
 @property NSMutableArray *combinationsArray;
+@property (weak, nonatomic) IBOutlet UILabel *currentTempScoreLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalScoreForPlayer;
+@property (weak, nonatomic) IBOutlet UILabel *currentPlayerName;
+@property Combinations *combinations;
+@property NSMutableArray *selectedDieArray;
 
 @end
 
@@ -25,7 +30,7 @@
     [super viewDidLoad];
 
     
-    
+    self.selectedDieArray = [[NSMutableArray alloc]init];
     self.DieLabels = [NSMutableArray new];
     for (DieLabel *die in self.dice) {
         die.delegate = self;
@@ -41,27 +46,38 @@
 //    NSSet *set2 =[[NSSet alloc]initWithArray:ary2];
 //    NSLog(@"%@",[set2 isSubsetOfSet:set1]?@"YES":@"NO");
     
-    Combinations *combinations = [[Combinations alloc]init];
-//    NSInteger score = [combinations checkForPoints:@[@1,@1,@2,@3,@1,@1]];
+     self.combinations = [[Combinations alloc]init];
+ // NSInteger score = [self.combinations checkForPoints:@[@5]];
 }
 
 
 -(BOOL)checkLabelTapped:(UIGestureRecognizer *)tapGesture
 {
-    
+    NSInteger tempScore = 0;
     DieLabel *label = (DieLabel *)tapGesture.view;
     label.isTapped = !label.isTapped;
     
     if (label.isTapped) {
+        [self.selectedDieArray addObject:label];
+       NSArray *someArray = [self getDieNumberFromDieLabel:self.selectedDieArray];
+
+      tempScore = tempScore + [self.combinations checkForPoints:someArray];
+
+        self.currentTempScoreLabel.text = [NSString stringWithFormat:@"%i", tempScore];
+
         [self.DieLabels removeObject:label];
         label.backgroundColor = [UIColor blueColor];
         NSLog(@"%@",label.text);
     } else {
         [self.DieLabels addObject:label];
         label.backgroundColor = [UIColor redColor];
+        tempScore = tempScore + [self.combinations checkForPoints:self.DieLabels];
+
     }
+
     return label.isTapped;
 }
+
 
 
 - (IBAction)onRollButtonPressed:(UIButton *)sender {
@@ -75,6 +91,19 @@
         
     }
    
+
+}
+-(NSArray *)getDieNumberFromDieLabel:(NSArray *)selectedLabels{
+
+    NSMutableArray *tempArray = [[NSMutableArray alloc] init];
+
+    for (DieLabel *eachLabel in selectedLabels){
+
+        [tempArray addObject:@([eachLabel.text intValue])];
+    }
+
+    return tempArray;
+
 
 }
 
