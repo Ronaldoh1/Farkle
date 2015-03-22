@@ -20,7 +20,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalScoreForPlayer;
 @property (weak, nonatomic) IBOutlet UILabel *currentPlayerName;
 @property Combinations *combinations;
-@property NSMutableArray *selectedDieArray;
+@property NSMutableArray *selectedDieLabels;
+@property NSInteger scoreForSelectedDice;
+@property NSInteger scoreBeforeCurrentRoll;
+@property NSInteger scoreForCurrentTurn;
 
 @end
 
@@ -30,64 +33,62 @@
     [super viewDidLoad];
 
     
-    self.selectedDieArray = [[NSMutableArray alloc]init];
+    self.selectedDieLabels = [[NSMutableArray alloc]init];
     self.DieLabels = [NSMutableArray new];
     for (DieLabel *die in self.dice) {
         die.delegate = self;
         die.isTapped = NO;
         [self.DieLabels addObject:die];
     }
-    NSArray *ary1 = @[@1,@1,@5,@5,@2];
-    NSArray *ary2 = @[@5,@5,@5];
-    
-//    NSCountedSet *set1 =[[NSCountedSet alloc]initWithArray:ary1];
-//    NSCountedSet *set2 =[[NSCountedSet alloc]initWithArray:ary2];
-//    NSSet *set1 =[[NSSet alloc]initWithArray:ary1];
-//    NSSet *set2 =[[NSSet alloc]initWithArray:ary2];
-//    NSLog(@"%@",[set2 isSubsetOfSet:set1]?@"YES":@"NO");
     
      self.combinations = [[Combinations alloc]init];
- // NSInteger score = [self.combinations checkForPoints:@[@5]];
+    
+    self.scoreForSelectedDice = 0;
+    self.scoreBeforeCurrentRoll = 0;
+    self.scoreForCurrentTurn = 0;
 }
 
 
 -(BOOL)checkLabelTapped:(UIGestureRecognizer *)tapGesture
 {
-    NSInteger tempScore = 0;
+   // NSInteger tempScore = 0;
     DieLabel *label = (DieLabel *)tapGesture.view;
     label.isTapped = !label.isTapped;
     
+
     if (label.isTapped) {
-        [self.selectedDieArray addObject:label];
-       NSArray *someArray = [self getDieNumberFromDieLabel:self.selectedDieArray];
-
-      tempScore = tempScore + [self.combinations checkForPoints:someArray];
-
-        self.currentTempScoreLabel.text = [NSString stringWithFormat:@"%i", tempScore];
-
+        [self.selectedDieLabels addObject:label];
         [self.DieLabels removeObject:label];
         label.backgroundColor = [UIColor blueColor];
-        NSLog(@"%@",label.text);
+//        NSLog(@"%@",label.text);
     } else {
+        [self.selectedDieLabels removeObject:label];
         [self.DieLabels addObject:label];
         label.backgroundColor = [UIColor redColor];
-        tempScore = tempScore + [self.combinations checkForPoints:self.DieLabels];
-
     }
+    NSArray *selectedDieNumbers = [self getDieNumberFromDieLabel:self.selectedDieLabels];
+    self.scoreForSelectedDice = [self.combinations checkForPoints:selectedDieNumbers];
+    self.scoreForCurrentTurn = self.scoreBeforeCurrentRoll + self.scoreForSelectedDice;
+    self.currentTempScoreLabel.text = [NSString stringWithFormat:@"%li", (long)self.scoreForCurrentTurn];
 
     return label.isTapped;
 }
 
 
 
-- (IBAction)onRollButtonPressed:(UIButton *)sender {
+- (IBAction)onRollButtonPressed:(UIButton *)sender
+{
+    self.scoreBeforeCurrentRoll = self.scoreForCurrentTurn;
+    for (DieLabel *die in self.selectedDieLabels) {
+        die.userInteractionEnabled = NO;
+    }
+    [self.selectedDieLabels removeAllObjects];
     for (DieLabel *die in self.DieLabels) {
-        
-        if (!die.isTapped) {
+//        if (!die.isTapped) {
             [die roll];
             die.text = [NSString stringWithFormat:@"%i",die.randomLabelNumber];
             NSLog(@"%@",die.text);
-        }
+//        }
         
     }
    

@@ -29,7 +29,7 @@
 
 -(void)generateCombinations
 {
-    NSDictionary *comb1 = @{@[@1]:@100, @[@5]:@50};
+    NSDictionary *comb1 = @{@1:@100, @5:@50};
     NSDictionary *comb3 = @{@[@1,@1,@1]:@1000,
                             @[@2,@2,@2]:@200,
                             @[@3,@3,@3]:@300,
@@ -83,7 +83,7 @@
     }
     
     for (NSArray *combination in self.winningCombination3){
-        int count = 0;
+//        int count = 0;
 //        NSMutableArray *tempArray = [[NSMutableArray alloc] init];
 
 //        for (NSNumber *someNumber in combination){
@@ -101,41 +101,35 @@
 //
 //        }
         if ([[NSCountedSet setWithArray:combination] isSubsetOfSet:[NSCountedSet setWithArray:tempSelectedDiceArray]]) {
-            count = 3;
-        }
+//            count = 3;
+//        }
 
-        if (count == 3) {
+//        if (count == 3) {
             for (int i = 0; i<combination.count; i++){
-                [tempSelectedDiceArray removeObject:combination[i]];
+                [tempSelectedDiceArray removeObjectAtIndex:[tempSelectedDiceArray indexOfObject:combination[i]]];
 
             }
             tempScore += [self.winningCombination3[combination] integerValue];
-            count = 0;
+//            count = 0;
         }
 
 
     }
-    if (tempSelectedDiceArray.count != 0) {
-        for (int i = 0; i<tempSelectedDiceArray.count; i++){
-            if ([tempSelectedDiceArray[i] isEqual:@[@1]]){
-                [tempSelectedDiceArray removeObject:@1];
-                tempScore += [self.winningCombination1[@[@1]] integerValue];
-
-            }
-            if ([tempSelectedDiceArray[i] isEqual:@[@5]]){
-                [tempSelectedDiceArray removeObject:@5];
-                tempScore += [self.winningCombination1[@[@5]] integerValue];
-
-            }else{
+   // if (tempSelectedDiceArray.count != 0) {
+        while (tempSelectedDiceArray.count > 0) {
+            NSNumber *aNumber = tempSelectedDiceArray[0];
+            if ([self.winningCombination1.allKeys containsObject:aNumber]) {
+                    [tempSelectedDiceArray removeObjectAtIndex:0]; //has to use removeObjectAtIndex to prevent removing all occurences of one nsnumber at once
+                    tempScore += [self.winningCombination1[aNumber] integerValue];
+            } else {
                 NSLog(@"please select other combinations");
                 break;
             }
-
         }
 
-    }
+    //}
 
-    return tempScore;
+return tempScore;
 
 }
 
