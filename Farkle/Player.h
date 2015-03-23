@@ -10,7 +10,7 @@
 
 @interface Player : NSObject
 @property NSString *playerName;
-@property NSString *playerScore;
+@property NSInteger playerScore;
 @property NSInteger winnings;
 @property NSInteger  highestScore;
 

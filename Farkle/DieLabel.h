@@ -17,7 +17,7 @@
 
 @end
 
-@interface DieLabel : UILabel
+@interface DieLabel : UILabel 
 
 @property int randomLabelNumber;
 @property id<DieLabelDelegate> delegate;

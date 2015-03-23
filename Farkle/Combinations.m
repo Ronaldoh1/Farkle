@@ -62,7 +62,7 @@
 -(NSInteger)checkForPoints:(NSArray *)selectedDice
 {
 
-    NSInteger tempScore = 0;
+    NSInteger score = 0;
 
     NSMutableArray *tempSelectedDiceArray =  selectedDice.mutableCopy;
 
@@ -72,9 +72,9 @@
 
             if ([combination isEqual:selectedDice]) {
 
-                tempScore = [self.winningCombination6[combination] integerValue];
+                score = [self.winningCombination6[combination] integerValue];
 
-                return tempScore;
+                return score;
 
             }
 
@@ -109,27 +109,45 @@
                 [tempSelectedDiceArray removeObjectAtIndex:[tempSelectedDiceArray indexOfObject:combination[i]]];
 
             }
-            tempScore += [self.winningCombination3[combination] integerValue];
+            score += [self.winningCombination3[combination] integerValue];
 //            count = 0;
         }
 
 
     }
-   // if (tempSelectedDiceArray.count != 0) {
-        while (tempSelectedDiceArray.count > 0) {
-            NSNumber *aNumber = tempSelectedDiceArray[0];
-            if ([self.winningCombination1.allKeys containsObject:aNumber]) {
-                    [tempSelectedDiceArray removeObjectAtIndex:0]; //has to use removeObjectAtIndex to prevent removing all occurences of one nsnumber at once
-                    tempScore += [self.winningCombination1[aNumber] integerValue];
+
+//        while (tempSelectedDiceArray.count > 0) {
+//            NSNumber *aNumber = tempSelectedDiceArray[0];
+//            if ([self.winningCombination1.allKeys containsObject:aNumber]) {
+//                    [tempSelectedDiceArray removeObjectAtIndex:0]; //has to use removeObjectAtIndex to prevent removing all occurences of one nsnumber at once
+//                    score += [self.winningCombination1[aNumber] integerValue];
+//            } else {
+//                NSLog(@"please select other combinations");
+//                break;
+//            }
+//        }
+    
+    if (tempSelectedDiceArray.count != 0) {
+        BOOL hasInvalidNumber = NO;
+        NSCountedSet *setForSelectedDice = [NSCountedSet setWithArray:tempSelectedDiceArray];
+        for (NSNumber *aNumber in setForSelectedDice) {
+            NSInteger scoreForNumber = [setForSelectedDice countForObject:aNumber] * [self.winningCombination1[aNumber] integerValue];
+            if (scoreForNumber == 0) {
+                hasInvalidNumber = YES;
             } else {
-                NSLog(@"please select other combinations");
-                break;
+                score += scoreForNumber;
             }
         }
+        if (hasInvalidNumber) {
+            if (score > 0) {
+                score = -1; //need to re-select;
+            } else {
+                score = 0; //Farkle
+            }
+        }
+    }
 
-    //}
-
-return tempScore;
+return score;
 
 }
 

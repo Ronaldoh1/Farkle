@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Board View Controller-->
@@ -16,63 +17,137 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa1-Xl-TQP" customClass="DieLabel">
-                                <rect key="frame" x="186" y="140" width="60" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Udc-Du-acl" appends="YES" id="Y3T-pI-30R"/>
-                                </connections>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9r-Xu-Cdt" customClass="DieLabel">
-                                <rect key="frame" x="112" y="200" width="60" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="RuD-Qx-gd8" appends="YES" id="zh1-TP-VFw"/>
-                                </connections>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktx-y7-wOE" customClass="DieLabel">
-                                <rect key="frame" x="112" y="140" width="60" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="qs8-4e-VPn" appends="YES" id="faA-HC-ASV"/>
-                                </connections>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kf-Rz-Ylh" customClass="DieLabel">
-                                <rect key="frame" x="112" y="256" width="60" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="gAO-lT-P3u" appends="YES" id="1dq-sw-VOW"/>
-                                </connections>
-                            </label>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ec3-j9-BcY" customClass="DieLabel">
-                                <rect key="frame" x="186" y="256" width="60" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Kdc-XY-s23" appends="YES" id="OUh-5s-gqN"/>
-                                </connections>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJx-yi-qU1">
-                                <rect key="frame" x="150" y="475" width="59" height="30"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Px2-6j-Qzl">
+                                <rect key="frame" x="0.0" y="162" width="414" height="505"/>
+                                <subviews>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xa1-Xl-TQP" customClass="DieLabel">
+                                        <rect key="frame" x="203" y="117" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Udc-Du-acl" appends="YES" id="Y3T-pI-30R"/>
+                                        </connections>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9r-Xu-Cdt" customClass="DieLabel">
+                                        <rect key="frame" x="127" y="191" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="RuD-Qx-gd8" appends="YES" id="zh1-TP-VFw"/>
+                                        </connections>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ktx-y7-wOE" customClass="DieLabel">
+                                        <rect key="frame" x="127" y="117" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="qs8-4e-VPn" appends="YES" id="faA-HC-ASV"/>
+                                        </connections>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kf-Rz-Ylh" customClass="DieLabel">
+                                        <rect key="frame" x="127" y="264" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="gAO-lT-P3u" appends="YES" id="1dq-sw-VOW"/>
+                                        </connections>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdI-mf-mPL" customClass="DieLabel">
+                                        <rect key="frame" x="203" y="191" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="umw-lX-ydW" appends="YES" id="sep-qI-OgU"/>
+                                        </connections>
+                                    </label>
+                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ec3-j9-BcY" customClass="DieLabel">
+                                        <rect key="frame" x="203" y="264" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <gestureRecognizers/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="Kdc-XY-s23" appends="YES" id="OUh-5s-gqN"/>
+                                        </connections>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.40111959171684908" green="0.80133390584552511" blue="1" alpha="0.46000000000000002" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="505" id="Zna-Y4-HH3"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Zna-Y4-HH3"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4Y-Ob-k0d">
+                                <rect key="frame" x="0.0" y="37" width="414" height="111"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current Player:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPd-Wl-edu">
+                                        <rect key="frame" x="19" y="5" width="115" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="115" id="9Zu-99-6JB"/>
+                                            <constraint firstAttribute="height" constant="21" id="kPs-Qo-RSp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7x-aD-mFs">
+                                        <rect key="frame" x="151" y="5" width="112" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="liR-EO-R3F"/>
+                                            <constraint firstAttribute="width" constant="112" id="zdD-bZ-jpd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlo-Al-YkZ">
+                                        <rect key="frame" x="313" y="5" width="86" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="0TW-wM-tQG"/>
+                                            <constraint firstAttribute="width" constant="86" id="G5O-jE-84L"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="centerX" secondItem="w7x-aD-mFs" secondAttribute="centerX" id="6oR-vL-kkP"/>
+                                    <constraint firstAttribute="height" constant="111" id="9tT-oo-pva"/>
+                                    <constraint firstItem="cPd-Wl-edu" firstAttribute="leading" secondItem="s4Y-Ob-k0d" secondAttribute="leading" constant="19" id="Hrw-aZ-c7S"/>
+                                    <constraint firstItem="cPd-Wl-edu" firstAttribute="top" secondItem="s4Y-Ob-k0d" secondAttribute="top" constant="5" id="SKJ-8Z-RQz"/>
+                                    <constraint firstItem="w7x-aD-mFs" firstAttribute="top" secondItem="s4Y-Ob-k0d" secondAttribute="top" constant="5" id="Yrx-b9-a8W"/>
+                                    <constraint firstAttribute="trailing" secondItem="tlo-Al-YkZ" secondAttribute="trailing" constant="15" id="mDh-N8-ogT"/>
+                                    <constraint firstItem="tlo-Al-YkZ" firstAttribute="top" secondItem="s4Y-Ob-k0d" secondAttribute="top" constant="5" id="ueX-ld-W1R"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kJx-yi-qU1">
+                                <rect key="frame" x="178" y="686" width="59" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="21o-5V-Ef5"/>
+                                    <constraint firstAttribute="height" constant="30" id="HRw-vc-bYn"/>
+                                </constraints>
                                 <state key="normal" title="Roll">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -80,48 +155,55 @@
                                     <action selector="onRollButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="S1W-JF-nzr"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GdI-mf-mPL" customClass="DieLabel">
-                                <rect key="frame" x="186" y="200" width="60" height="43"/>
-                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <gestureRecognizers/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ldS-zp-h2v">
+                                <rect key="frame" x="308" y="690" width="37" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="CMz-So-7nF"/>
+                                    <constraint firstAttribute="width" constant="37" id="MwT-aL-Smq"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="umw-lX-ydW" appends="YES" id="sep-qI-OgU"/>
-                                </connections>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Current Player:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPd-Wl-edu">
-                                <rect key="frame" x="24" y="20" width="115" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Total Score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tlo-Al-YkZ">
-                                <rect key="frame" x="147" y="20" width="86" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Current Score" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w7x-aD-mFs">
-                                <rect key="frame" x="16" y="49" width="112" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="s4Y-Ob-k0d" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="17" id="4Zt-mS-423"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="ldS-zp-h2v" secondAttribute="trailing" constant="53" id="ELc-db-A2P"/>
+                            <constraint firstItem="kJx-yi-qU1" firstAttribute="top" secondItem="Px2-6j-Qzl" secondAttribute="bottom" constant="19" id="F6d-jT-73r"/>
+                            <constraint firstItem="ldS-zp-h2v" firstAttribute="top" secondItem="Px2-6j-Qzl" secondAttribute="bottom" constant="23" id="F92-Cc-V7U"/>
+                            <constraint firstAttribute="centerX" secondItem="kJx-yi-qU1" secondAttribute="centerX" id="YaF-me-8K5"/>
+                            <constraint firstItem="kJx-yi-qU1" firstAttribute="top" secondItem="Px2-6j-Qzl" secondAttribute="bottom" constant="19" id="cpj-Uf-jtz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Px2-6j-Qzl" secondAttribute="trailing" constant="-16" id="eq6-hU-adX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="s4Y-Ob-k0d" secondAttribute="trailing" constant="-16" id="glz-mc-ZZb"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kJx-yi-qU1" secondAttribute="bottom" constant="20" id="i6G-pL-RfP"/>
+                            <constraint firstAttribute="centerX" secondItem="kJx-yi-qU1" secondAttribute="centerX" id="lGD-w5-AuL"/>
+                            <constraint firstItem="s4Y-Ob-k0d" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="peY-Ja-3Ia"/>
+                            <constraint firstItem="Px2-6j-Qzl" firstAttribute="top" secondItem="s4Y-Ob-k0d" secondAttribute="bottom" constant="14" id="y2t-Wk-YkP"/>
+                            <constraint firstItem="Px2-6j-Qzl" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-16" id="zOp-iH-XME"/>
+                            <constraint firstItem="kJx-yi-qU1" firstAttribute="top" secondItem="Px2-6j-Qzl" secondAttribute="bottom" constant="19" id="zqY-7P-DNr"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="F6d-jT-73r"/>
+                                <exclude reference="lGD-w5-AuL"/>
+                                <exclude reference="zqY-7P-DNr"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="currentPlayerName" destination="cPd-Wl-edu" id="dMQ-Ay-vsx"/>
                         <outlet property="currentTempScoreLabel" destination="w7x-aD-mFs" id="tPf-2R-fZN"/>
+                        <outlet property="rollView" destination="Px2-6j-Qzl" id="PSY-vd-GKa"/>
+                        <outlet property="roundLabel" destination="ldS-zp-h2v" id="AxF-GZ-bVc"/>
+                        <outlet property="scoreView" destination="s4Y-Ob-k0d" id="4VF-eQ-a30"/>
                         <outlet property="totalScoreForPlayer" destination="tlo-Al-YkZ" id="umt-eu-x4V"/>
                         <outletCollection property="dice" destination="Xa1-Xl-TQP" id="vxV-KP-QRB"/>
                         <outletCollection property="dice" destination="g9r-Xu-Cdt" id="ulF-oA-H12"/>
-                        <outletCollection property="dice" destination="ec3-j9-BcY" id="nlv-zR-1ju"/>
                         <outletCollection property="dice" destination="ktx-y7-wOE" id="Vud-Wh-CnC"/>
                         <outletCollection property="dice" destination="3Kf-Rz-Ylh" id="yR2-oL-Xai"/>
+                        <outletCollection property="dice" destination="ec3-j9-BcY" id="nlv-zR-1ju"/>
                         <outletCollection property="dice" destination="GdI-mf-mPL" id="LDP-kN-ERh"/>
                     </connections>
                 </viewController>
