@@ -12,7 +12,6 @@
 #import "Player.h"
 
 @interface BoardViewController () <DieLabelDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,UICollisionBehaviorDelegate>
-@property (weak, nonatomic) IBOutlet UILabel *userScore;
 
 @property (weak, nonatomic) IBOutlet UIView *rollView;
 @property (weak, nonatomic) IBOutlet UIView *scoreView;
@@ -21,11 +20,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *totalScoreForPlayer;
 @property (weak, nonatomic) IBOutlet UILabel *currentPlayerName;
 @property (weak, nonatomic) IBOutlet UILabel *roundLabel;
+@property (weak, nonatomic) IBOutlet UILabel *turnLabel;
 
 @property NSMutableArray *players;
 @property NSInteger indexOfCurrentPlayer;
 
-@property NSMutableArray *DieLabels;
+@property NSMutableArray *dieLabels;
 @property NSMutableArray *combinationsArray;
 
 @property Combinations *combinations;
@@ -60,15 +60,19 @@
 
     
     self.selectedDieLabels = [[NSMutableArray alloc]init];
-    self.DieLabels = [NSMutableArray new];
+    self.dieLabels = [NSMutableArray new];
     self.dieLabelPositionsInRollView = [NSMutableArray new];
     self.dieLabelPositionsInScoreView = [NSMutableArray new];
-    for (DieLabel *die in self.dice) {
-        die.delegate = self;
-        die.isTapped = NO;
-        [self.DieLabels addObject:die];
-        [self.dieLabelPositionsInRollView addObject:[NSValue valueWithCGPoint:die.frame.origin]];
+    for (DieLabel *dieLabel in self.dice) {
+        [dieLabel roll];
+        dieLabel.text = [NSString stringWithFormat:@"%i",dieLabel.randomLabelNumber];
+        dieLabel.delegate = self;
+        dieLabel.userInteractionEnabled = NO;
+        dieLabel.isTapped = NO;
+        [self.dieLabels addObject:dieLabel];
+        [self.dieLabelPositionsInRollView addObject:[NSValue valueWithCGPoint:dieLabel.frame.origin]];
     }
+ 
     self.dieLabelDefaultPositionsInRollView = self.dieLabelPositionsInRollView.copy;
     
     self.dieLabelWidth = [self.dice[0] frame].size.width;
@@ -84,11 +88,12 @@
     self.scoreBeforeCurrentRoll = 0;
     self.scoreForCurrentTurn = 0;
     self.indexOfDieLabelInScoreView = 0;
-    self.roundLabel.text = @"0";
+    self.roundLabel.text = @"Round: 0";
+    self.turnLabel.text = @"Turn: 1";
     
     
-    self.maxNumberOfRolls = 10;
-    self.maxNumberOfTurns = 10;
+    self.maxNumberOfRolls = 5;
+    self.maxNumberOfTurns = 2;
     self.players = [NSMutableArray new];
     
     [self.players addObject:[[Player alloc] initWithPlayerName:@"Ron"]];
@@ -124,7 +129,7 @@
         }
         
         [self.selectedDieLabels removeAllObjects];
-        for (DieLabel *die in self.DieLabels) {
+        for (DieLabel *die in self.dieLabels) {
             
             [die roll];
             [self animateDice:self.dice];
@@ -199,11 +204,6 @@
         
         
         [propertyBehavior addAngularVelocity:10.0 forItem:label];
-        
-        
-        
-        
-        
     }
     
     //Add bounce behaviour to all the labels
@@ -238,13 +238,13 @@
 
     if (label.isTapped) {
         [self.selectedDieLabels addObject:label];
-        [self.DieLabels removeObject:label];
+        [self.dieLabels removeObject:label];
         [self moveDieLabel:label toView:self.scoreView
                       atPosition:[self.dieLabelPositionsInScoreView[self.indexOfDieLabelInScoreView] CGPointValue]];
         self.indexOfDieLabelInScoreView += 1;
     } else {
         [self.selectedDieLabels removeObject:label];
-        [self.DieLabels addObject:label];
+        [self.dieLabels addObject:label];
         [self moveDieLabel:label toView:self.rollView
                       atPosition:[self.dieLabelPositionsInRollView[indexOfDieLabelInRollView] CGPointValue]];
         self.indexOfDieLabelInScoreView -= 1;
@@ -252,6 +252,9 @@
     
     NSArray *selectedDieNumbers = [self getDieNumberFromDieLabel:self.selectedDieLabels];
     self.scoreForSelectedDice = [self.combinations checkForPoints:selectedDieNumbers];
+    if (self.dieLabels.count == 0 && self.scoreForSelectedDice > 0) {
+        [self issueAlertWithMessage:@"Switch player!" tagNumber:0];
+    }
     self.scoreForSelectedDice = MAX(0,self.scoreForSelectedDice);
     self.scoreForCurrentTurn = self.scoreBeforeCurrentRoll + self.scoreForSelectedDice;
 
@@ -292,45 +295,34 @@
 - (IBAction)onRollButtonPressed:(UIButton *)sender
 {
     self.scoreBeforeCurrentRoll = self.scoreForCurrentTurn;
-    for (DieLabel *die in self.selectedDieLabels) {
-        die.userInteractionEnabled = NO;
+    for (DieLabel *dieLabel in self.selectedDieLabels) {
+        dieLabel.userInteractionEnabled = NO;
     }
     [self.selectedDieLabels removeAllObjects];
 
-    for (DieLabel *die in self.DieLabels) {
-     
-        [die roll];
-        die.text = [NSString stringWithFormat:@"%i",die.randomLabelNumber];
-        NSLog(@"%@",die.text);
+    for (DieLabel *dieLabel in self.dieLabels) {
+        [dieLabel roll];
+        dieLabel.userInteractionEnabled = YES;
+        dieLabel.text = [NSString stringWithFormat:@"%i",dieLabel.randomLabelNumber];
+        NSLog(@"%@",dieLabel.text);
     }
     
     self.numberOfRolls += 1;
-    self.roundLabel.text = [NSString stringWithFormat:@"%li",(long)self.numberOfRolls];
+    self.roundLabel.text = [NSString stringWithFormat:@"Round: %li",(long)self.numberOfRolls];
     
-    NSArray *availableDieNumbers = [self getDieNumberFromDieLabel:self.DieLabels];
+    NSArray *availableDieNumbers = [self getDieNumberFromDieLabel:self.dieLabels];
     if ([self.combinations checkForPoints:availableDieNumbers] == 0 ) {
-//        [self updatePlayerStates];
-        [self issueWarnings:@"Farkle!"];
+        [self issueAlertWithMessage:@"Farkle!" tagNumber:1];
         NSLog(@"Farkle!");
     }
     
-   if (self.numberOfRolls == self.maxNumberOfRolls - 1 ) {
-//        [self updatePlayerStates];
-       [self issueWarnings:@"No more rolls!"];
+   if (self.numberOfRolls > self.maxNumberOfRolls) {
+       [self issueAlertWithMessage:@"No more rolls!" tagNumber:2];
         NSLog(@"No more rolls!Change player!");
     }
 }
 
--(void)issueWarnings:(NSString *)message
-{
-    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-    [alertView show];
-}
 
--(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    [self updatePlayerStates];
-}
 
 
 
@@ -338,20 +330,37 @@
 
 -(void)updatePlayerStates
 {
-        Player *currentPlayer = self.players[self.indexOfCurrentPlayer];
-        currentPlayer.playerScore += self.scoreForCurrentTurn;
-        self.numberOfTurns[self.indexOfCurrentPlayer] = @([self.numberOfTurns[self.indexOfCurrentPlayer] integerValue] + 1);
-        self.indexOfCurrentPlayer = (self.indexOfCurrentPlayer + 1) % self.players.count;
-        self.currentPlayerName.text = [self.players[self.indexOfCurrentPlayer] playerName];
-        self.currentTempScoreLabel.text =  @"0";
-        self.totalScoreForPlayer.text = [NSString stringWithFormat:@"%li", (long)([self.players[self.indexOfCurrentPlayer] playerScore])];
-        self.numberOfRolls = 0;
-        self.roundLabel.text = [NSString stringWithFormat:@"%li",(long)self.numberOfRolls];
-        [self returnDiceToDefaultPositions];
-    
-    for (DieLabel *dieLabel in self.dice) {
-        dieLabel.userInteractionEnabled = YES;
+    Player *currentPlayer = self.players[self.indexOfCurrentPlayer];
+    currentPlayer.playerScore += self.scoreForCurrentTurn;
+    self.numberOfTurns[self.indexOfCurrentPlayer] = @([self.numberOfTurns[self.indexOfCurrentPlayer] integerValue] + 1);
+    if ([self.numberOfTurns isEqual:@[@(self.maxNumberOfTurns),@(self.maxNumberOfTurns),@(self.maxNumberOfTurns)]]) {
+        [self checkWinners];
     }
+    
+    self.indexOfCurrentPlayer = (self.indexOfCurrentPlayer + 1) % self.players.count;
+    self.turnLabel.text = [NSString stringWithFormat:@"Turn: %li",(long)[self.numberOfTurns[self.indexOfCurrentPlayer] integerValue] + 1];
+    self.numberOfRolls = 0;
+    self.roundLabel.text = [NSString stringWithFormat:@"Round: %li",(long)self.numberOfRolls];
+    self.currentPlayerName.text = [self.players[self.indexOfCurrentPlayer] playerName];
+    self.currentTempScoreLabel.text =  @"0";
+    self.totalScoreForPlayer.text = [NSString stringWithFormat:@"%li", (long)([self.players[self.indexOfCurrentPlayer] playerScore])];
+
+
+    [self returnDiceToDefaultPositions];
+    self.indexOfDieLabelInScoreView = 0;
+
+    for (DieLabel *dieLabel in self.dice) {
+        [dieLabel roll];
+        dieLabel.text = [NSString stringWithFormat:@"%i",dieLabel.randomLabelNumber];
+        dieLabel.userInteractionEnabled = NO;
+        dieLabel.isTapped = NO;
+    }
+    self.dieLabels = self.dice.mutableCopy;
+    self.scoreBeforeCurrentRoll = 0;
+    self.scoreForCurrentTurn = 0;
+    [self.selectedDieLabels removeAllObjects];
+    
+ 
 }
 
 
@@ -372,6 +381,22 @@
         return obj.playerScore == maxScore;
     }];
     self.winners = [self.players objectsAtIndexes:indexSetOfWinners];
+    NSString *winnerMessage;
+    if (self.winners.count == self.players.count) {
+        winnerMessage = @"No winner!";
+    } else {
+        if (self.winners.count > 1) {
+            winnerMessage = @"Winners are";
+        } else {
+            winnerMessage = @"Winner is";
+        }
+        for (Player *winner in self.winners) {
+            winner.winnings += 1;
+            winnerMessage = [NSString stringWithFormat:@"%@ %@",winnerMessage,winner.playerName];
+        }
+    }
+    [self issueAlertWithMessage:winnerMessage tagNumber:3];
+
 }
 
 
@@ -386,6 +411,69 @@
     }
 
     return tempArray;
+}
+
+
+-(void)issueAlertWithMessage:(NSString *)message tagNumber:(int)tagNumber
+{
+    UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:nil message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+    alertView.tag = tagNumber;
+    [alertView show];
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (alertView.tag) {
+        case 0:
+        case 1:
+        case 2:
+            [self updatePlayerStates];
+            break;
+        case 3:
+            [self resetStatesForNewGame];
+            break;
+        default:
+            break;
+    }
+
+}
+
+-(void)resetStatesForNewGame
+{
+    
+    for (DieLabel *dieLabel in self.dice) {
+        [dieLabel roll];
+        dieLabel.text = [NSString stringWithFormat:@"%i",dieLabel.randomLabelNumber];
+        dieLabel.userInteractionEnabled = NO;
+        dieLabel.isTapped = NO;
+    }
+    self.dieLabels = self.dice.mutableCopy;
+    self.scoreBeforeCurrentRoll = 0;
+    self.scoreForCurrentTurn = 0;
+    [self.selectedDieLabels removeAllObjects];
+ 
+ 
+    self.scoreForSelectedDice = 0;
+    self.scoreBeforeCurrentRoll = 0;
+    self.scoreForCurrentTurn = 0;
+    self.indexOfDieLabelInScoreView = 0;
+    self.roundLabel.text = @"Round: 0";
+    self.turnLabel.text = @"Turn: 1";
+    self.currentTempScoreLabel.text =  @"0";
+    self.totalScoreForPlayer.text = @"0";
+
+    
+    for (Player *player in self.players) {
+        player.playerScore = 0;
+    }
+    self.indexOfCurrentPlayer = 0;
+    self.currentPlayerName.text = [self.players[self.indexOfCurrentPlayer] playerName];
+    self.numberOfRolls = 0;
+    
+    self.numberOfTurns = @[@0,@0,@0].mutableCopy;
+    self.winners  = [NSArray new];
+    
+    [self returnDiceToDefaultPositions];
 }
 
 
