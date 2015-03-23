@@ -11,7 +11,7 @@
 #import "Combinations.h"
 #import "Player.h"
 
-@interface BoardViewController () <DieLabelDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,UICollisionBehaviorDelegate>
+@interface BoardViewController () <DieLabelDelegate,UIGestureRecognizerDelegate,UIAlertViewDelegate,UICollisionBehaviorDelegate,UIDynamicAnimatorDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *rollView;
 @property (weak, nonatomic) IBOutlet UIView *scoreView;
@@ -113,7 +113,7 @@
 //Set up the viewcontroller becomes first responder to the shakegesture
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    [self becomeFirstResponder];
+    [self.rollView becomeFirstResponder];
 }
 
 //the following method detects the UIEvent (UIEvent Motion Shakes)
@@ -122,25 +122,31 @@
     if(event.type == UIEventSubtypeMotionShake)
     {
         
-        self.scoreBeforeCurrentRoll = self.scoreForCurrentTurn;
+//        self.scoreBeforeCurrentRoll = self.scoreForCurrentTurn;
+//        
+//        for (DieLabel *dieLabel in self.selectedDieLabels) {
+//            dieLabel.userInteractionEnabled = NO;
+//        }
+//        
+//        [self.selecteddielabels removeallobjects];
+//        for (dielabel *dielabel in self.dielabels) {
+//
+//            [dieLabel roll];
+//            [self animateDice:self.dice];
+//            dieLabel.text = [NSString stringWithFormat:@"%i",dieLabel.randomLabelNumber];
+//            NSLog(@"%@",dieLabel.text);
+//
+        [self rollDice];
+        [self addPhysicsToLabels:self.dieLabels];
+//        [self animateDice:self.dieLabels];
+
+
+
         
-        for (DieLabel *die in self.selectedDieLabels) {
-            die.userInteractionEnabled = NO;
-        }
-        
-        [self.selectedDieLabels removeAllObjects];
-        for (DieLabel *die in self.dieLabels) {
-            
-            [die roll];
-            [self animateDice:self.dice];
-            die.text = [NSString stringWithFormat:@"%i",die.randomLabelNumber];
-            NSLog(@"%@",die.text);
-            
-            
-        }
-        
+    
     }
 }
+
 
 //Method neeeded to recognize gesture.
 
@@ -154,22 +160,25 @@
 
 -(void)animateDice:(NSArray *)Arraylabel{
     
+    __weak BoardViewController *weak_self = self;
     
     for (int i = 0; i<Arraylabel.count; i++) {
         
-        UILabel *label = Arraylabel[i];
+        DieLabel *label = Arraylabel[i];
         
         [UIView animateWithDuration:(5) animations:^{
             //label.center = self.originalFutureCenter;
             label.transform= CGAffineTransformMakeRotation (3.14*2);
             //[self addPhysicsToLabels:label];
-            [self addPhysicsToLabels:Arraylabel];
+//            [weak_self addPhysicsToLabels:Arraylabel];
             // self.theFutureLabel.alpha = 0;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:4 animations:^{
                 
+//            [weak_self addPhysicsToLabels:Arraylabel];
                 label.transform= CGAffineTransformMakeRotation (3.14*2);
                 //[self addPhysicsToLabels:label];
+//                weak_self.animator = nil;
             }];
         }];
     }
@@ -178,34 +187,36 @@
 
 -(void)addPhysicsToLabels:(NSArray *)availableLabelsArray{
     
-    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.rollView];
+    self.animator.delegate = self;
     
     
-    for (UILabel *label in availableLabelsArray){
-        
         //Add Gravity to each label
-        UIGravityBehavior* gravityBehavior =
-        [[UIGravityBehavior alloc] initWithItems:@[label]];
-        [self.animator addBehavior:gravityBehavior];
+        //UIGravityBehavior* gravityBehavior =
+        //[[UIGravityBehavior alloc] initWithItems:@[label]];
+        //[self.animator addBehavior:gravityBehavior];
         
         //Add Collision to each label
-        self.collisionBehavior =
-        [[UICollisionBehavior alloc] initWithItems:@[label]];
-        self.collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
-        [self.animator addBehavior:self.collisionBehavior];
+       UICollisionBehavior *collisionBehavior =
+//        [[UICollisionBehavior alloc] initWithItems:@[label]];
+        [[UICollisionBehavior alloc] initWithItems:self.dieLabels];
+       collisionBehavior.translatesReferenceBoundsIntoBoundary = YES;
+        [self.animator addBehavior:collisionBehavior];
         
         //Add ellasticity to each label to make it bounce,allow rotation, allow angular resistance.
         UIDynamicItemBehavior *propertyBehavior =
-        [[UIDynamicItemBehavior alloc] initWithItems:@[label]];
+//        [[UIDynamicItemBehavior alloc] initWithItems:@[label]];
+        [[UIDynamicItemBehavior alloc] initWithItems:self.dieLabels];
         propertyBehavior.elasticity = 0.9f;
         propertyBehavior.allowsRotation = true;
         propertyBehavior.angularResistance = .5;
         [self.animator addBehavior:propertyBehavior];
         
-        
+    
+    for (UILabel *label in availableLabelsArray){
         [propertyBehavior addAngularVelocity:10.0 forItem:label];
     }
-    
+
     //Add bounce behaviour to all the labels
     
     UIDynamicBehavior *bounceBehavior = [[UIDynamicItemBehavior alloc]initWithItems:availableLabelsArray];
@@ -218,9 +229,8 @@
     [self.animator addBehavior:instantPushBehavior];
     
     
-    
-    
 }
+
 
 -(void)collisionBehavior:(UICollisionBehavior *)behavior endedContactForItem:(id<UIDynamicItem>)item withBoundaryIdentifier:(id<NSCopying>)identifier{
     //  [self animateDice:self.dice];
@@ -294,6 +304,11 @@
 
 - (IBAction)onRollButtonPressed:(UIButton *)sender
 {
+    [self rollDice];
+}
+
+-(void)rollDice
+{
     self.scoreBeforeCurrentRoll = self.scoreForCurrentTurn;
     for (DieLabel *dieLabel in self.selectedDieLabels) {
         dieLabel.userInteractionEnabled = NO;
@@ -319,7 +334,7 @@
    if (self.numberOfRolls > self.maxNumberOfRolls) {
        [self issueAlertWithMessage:@"No more rolls!" tagNumber:2];
         NSLog(@"No more rolls!Change player!");
-    }
+    } 
 }
 
 
